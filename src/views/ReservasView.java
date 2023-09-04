@@ -285,8 +285,6 @@ public class ReservasView extends JFrame {
 					
 					int milisecondsByDay = 86400000;
 					long dias = (long) Math.floor((fechaSalida.getTime() - fechaEntrada.getTime()) / milisecondsByDay);
-
-					System.out.println(dias);
 					
 					long valor = dias * 66;
 					
@@ -294,7 +292,6 @@ public class ReservasView extends JFrame {
 					
 				}
 			
-				
 			}
 		});
 		txtFechaSalida.setDateFormatString("yyyy-MM-dd");
