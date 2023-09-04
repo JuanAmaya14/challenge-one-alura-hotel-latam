@@ -150,7 +150,7 @@ Luego haz clic en <em>General</em> y en <em>Workspace</em>. Si tu <em>Text File 
      <img width="500" heigth="500" src="https://user-images.githubusercontent.com/101413385/173691963-1e3d966e-5162-4393-9232-d5d395d5440f.png">
 </p>
 
-## 📊 Base de Dados
+## 📊 Base de Datos
 
 ### ¿Cómo importar MySqlConnector al proyecto?
 
