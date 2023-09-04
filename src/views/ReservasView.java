@@ -8,6 +8,8 @@ import java.awt.SystemColor;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
 import java.awt.Color;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
@@ -15,6 +17,9 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -24,6 +29,11 @@ import java.beans.PropertyChangeEvent;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 @SuppressWarnings("serial")
@@ -103,13 +113,13 @@ public class ReservasView extends JFrame {
 		
 		JLabel lblCheckIn = new JLabel("FECHA DE CHECK IN");
 		lblCheckIn.setForeground(SystemColor.textInactiveText);
-		lblCheckIn.setBounds(68, 136, 169, 14);
+		lblCheckIn.setBounds(68, 136, 195, 20);
 		lblCheckIn.setFont(new Font("Roboto Black", Font.PLAIN, 18));
 		panel.add(lblCheckIn);
 		
 		JLabel lblCheckOut = new JLabel("FECHA DE CHECK OUT");
 		lblCheckOut.setForeground(SystemColor.textInactiveText);
-		lblCheckOut.setBounds(68, 221, 187, 14);
+		lblCheckOut.setBounds(68, 221, 210, 20);
 		lblCheckOut.setFont(new Font("Roboto Black", Font.PLAIN, 18));
 		panel.add(lblCheckOut);
 		
@@ -120,7 +130,7 @@ public class ReservasView extends JFrame {
 		panel.add(lblFormaPago);
 		
 		JLabel lblTitulo = new JLabel("SISTEMA DE RESERVAS");
-		lblTitulo.setBounds(109, 60, 219, 42);
+		lblTitulo.setBounds(109, 60, 240, 42);
 		lblTitulo.setForeground(new Color(12, 138, 199));
 		lblTitulo.setFont(new Font("Roboto", Font.BOLD, 20));
 		panel.add(lblTitulo);
@@ -144,7 +154,7 @@ public class ReservasView extends JFrame {
 		
 		JLabel lblValor = new JLabel("VALOR DE LA RESERVA");
 		lblValor.setForeground(SystemColor.textInactiveText);
-		lblValor.setBounds(72, 303, 196, 14);
+		lblValor.setBounds(72, 303, 215, 14);
 		lblValor.setFont(new Font("Roboto Black", Font.PLAIN, 18));
 		panel.add(lblValor);
 		
@@ -265,6 +275,26 @@ public class ReservasView extends JFrame {
 		txtFechaSalida.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				//Activa el evento, después del usuario seleccionar las fechas se debe calcular el valor de la reserva
+				
+				SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+				
+				Date fechaEntrada = txtFechaEntrada.getDate();
+				Date fechaSalida = txtFechaSalida.getDate();
+				
+				if(fechaEntrada != null && fechaSalida != null) {
+					
+					int milisecondsByDay = 86400000;
+					long dias = (long) Math.floor((fechaSalida.getTime() - fechaEntrada.getTime()) / milisecondsByDay);
+
+					System.out.println(dias);
+					
+					long valor = dias * 66;
+					
+					txtValor.setText("$ " + String.valueOf(valor));
+					
+				}
+			
+				
 			}
 		});
 		txtFechaSalida.setDateFormatString("yyyy-MM-dd");
@@ -276,12 +306,14 @@ public class ReservasView extends JFrame {
 		txtValor.setBackground(SystemColor.text);
 		txtValor.setHorizontalAlignment(SwingConstants.CENTER);
 		txtValor.setForeground(Color.BLACK);
-		txtValor.setBounds(78, 328, 43, 33);
+		txtValor.setBounds(78, 328, 78, 33);
 		txtValor.setEditable(false);
 		txtValor.setFont(new Font("Roboto Black", Font.BOLD, 17));
 		txtValor.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+		txtValor.setText("$ ");
 		panel.add(txtValor);
 		txtValor.setColumns(10);
+		
 
 
 		txtFormaPago = new JComboBox();
@@ -292,7 +324,7 @@ public class ReservasView extends JFrame {
 		txtFormaPago.setModel(new DefaultComboBoxModel(new String[] {"Tarjeta de Crédito", "Tarjeta de Débito", "Dinero en efectivo"}));
 		panel.add(txtFormaPago);
 
-		JPanel btnsiguiente = new JPanel();
+		JButton btnsiguiente = new JButton("SIGUIENTE");
 		btnsiguiente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -306,6 +338,8 @@ public class ReservasView extends JFrame {
 		});
 		btnsiguiente.setLayout(null);
 		btnsiguiente.setBackground(SystemColor.textHighlight);
+		btnsiguiente.setFont(new Font("Roboto Black", Font.PLAIN, 15));
+		btnsiguiente.setForeground(new Color(255, 255, 255));
 		btnsiguiente.setBounds(238, 493, 122, 35);
 		panel.add(btnsiguiente);
 		btnsiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
