@@ -13,6 +13,9 @@ import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
+
+import Models.Reserva;
+
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -38,7 +41,7 @@ import java.time.format.DateTimeFormatter;
 
 @SuppressWarnings("serial")
 public class ReservasView extends JFrame {
-
+	
 	private JPanel contentPane;
 	public static JTextField txtValor;
 	public static JDateChooser txtFechaEntrada;
@@ -276,8 +279,6 @@ public class ReservasView extends JFrame {
 			public void propertyChange(PropertyChangeEvent evt) {
 				//Activa el evento, después del usuario seleccionar las fechas se debe calcular el valor de la reserva
 				
-				SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-				
 				Date fechaEntrada = txtFechaEntrada.getDate();
 				Date fechaSalida = txtFechaSalida.getDate();
 				
@@ -288,7 +289,7 @@ public class ReservasView extends JFrame {
 					
 					long valor = dias * 66;
 					
-					txtValor.setText("$ " + String.valueOf(valor));
+					txtValor.setText(String.valueOf(valor));
 					
 				}
 			
@@ -307,11 +308,8 @@ public class ReservasView extends JFrame {
 		txtValor.setEditable(false);
 		txtValor.setFont(new Font("Roboto Black", Font.BOLD, 17));
 		txtValor.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-		txtValor.setText("$ ");
 		panel.add(txtValor);
 		txtValor.setColumns(10);
-		
-
 
 		txtFormaPago = new JComboBox();
 		txtFormaPago.setBounds(68, 417, 289, 38);
@@ -325,12 +323,17 @@ public class ReservasView extends JFrame {
 		btnsiguiente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (ReservasView.txtFechaEntrada.getDate() != null && ReservasView.txtFechaSalida.getDate() != null) {		
-					RegistroHuesped registro = new RegistroHuesped();
-					registro.setVisible(true);
+				if (txtFechaEntrada.getDate() != null && txtFechaSalida.getDate() != null) {
+					
+					RegistroHuesped registroHuesped = new RegistroHuesped();
+					registroHuesped.setVisible(true);
+					
+					dispose();
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
 				}
+				
 			}						
 		});
 		btnsiguiente.setLayout(null);
@@ -340,6 +343,11 @@ public class ReservasView extends JFrame {
 		btnsiguiente.setBounds(238, 493, 122, 35);
 		panel.add(btnsiguiente);
 		btnsiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+		
+		JLabel SimboloDolar = new JLabel("$");
+		SimboloDolar.setFont(new Font("Dialog", Font.PLAIN, 20));
+		SimboloDolar.setBounds(48, 328, 22, 31);
+		panel.add(SimboloDolar);
 
 
 	}
