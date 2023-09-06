@@ -1,6 +1,6 @@
 package Models;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Huesped {
 
@@ -15,12 +15,12 @@ public class Huesped {
 	public Huesped() {
 	}
 
-	public Huesped(long id, String nombre, String apellido, Date fechaDeNacimiento, String nacionalidad,
+	public Huesped(long id, String nombre, String apellido, Date fechaDeNacimiento2, String nacionalidad,
 			String telefono, long idReserva) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.fechaDeNacimiento = fechaDeNacimiento;
+		this.fechaDeNacimiento = fechaDeNacimiento2;
 		this.nacionalidad = nacionalidad;
 		this.telefono = telefono;
 		this.idReserva = idReserva;
@@ -102,7 +102,5 @@ public class Huesped {
 				+ fechaDeNacimiento + ", nacionalidad=" + nacionalidad + ", telefono=" + telefono + ", idReserva="
 				+ idReserva + "]";
 	}
-	
-	
 
 }

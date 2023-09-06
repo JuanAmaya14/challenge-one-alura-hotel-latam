@@ -34,19 +34,18 @@ import javax.swing.JSeparator;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import DAO.HuespedDAO;
-import DAO.ReservasDAO;
+import Controller.HuespedController;
+import Controller.ReservasController;
 
 @SuppressWarnings("serial")
 public class RegistroHuesped extends JFrame {
-	
-	HuespedDAO huespedDao = new HuespedDAO();
-	ReservasDAO reservasDao = new ReservasDAO();
+
+	private HuespedController huespedController = new HuespedController();
 	private JPanel contentPane;
 	private JTextField txtNombre;
 	private JTextField txtApellido;
 	private JTextField txtTelefono;
-	private JTextField txtNreserva;
+//	private JTextField txtNreserva;
 	private JDateChooser txtFechaN;
 	private JComboBox<Format> txtNacionalidad;
 	private JLabel labelExit;
@@ -141,6 +140,21 @@ public class RegistroHuesped extends JFrame {
 		btnAtras.add(labelAtras);
 
 		txtNombre = new JTextField();
+		txtNombre.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+
+				if (!Character.isLetter(e.getKeyChar()) && !(e.getKeyChar() == KeyEvent.VK_SPACE)
+						&& !(e.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+					e.consume();
+				}
+
+				if (txtNombre.getText().trim().length() == 50) {
+					e.consume();
+				}
+
+			}
+		});
 		txtNombre.setFont(new Font("Roboto", Font.PLAIN, 16));
 		txtNombre.setBounds(560, 135, 285, 33);
 		txtNombre.setBackground(Color.WHITE);
@@ -149,6 +163,21 @@ public class RegistroHuesped extends JFrame {
 		contentPane.add(txtNombre);
 
 		txtApellido = new JTextField();
+		txtApellido.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+
+				if (!Character.isLetter(e.getKeyChar()) && !(e.getKeyChar() == KeyEvent.VK_SPACE)
+						&& !(e.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+					e.consume();
+				}
+
+				if (txtApellido.getText().trim().length() == 50) {
+					e.consume();
+				}
+
+			}
+		});
 		txtApellido.setFont(new Font("Roboto", Font.PLAIN, 16));
 		txtApellido.setBounds(560, 204, 285, 33);
 		txtApellido.setColumns(10);
@@ -199,7 +228,7 @@ public class RegistroHuesped extends JFrame {
 		contentPane.add(lblApellido);
 
 		JLabel lblFechaN = new JLabel("FECHA DE NACIMIENTO");
-		lblFechaN.setBounds(560, 256, 255, 14);
+		lblFechaN.setBounds(560, 256, 255, 20);
 		lblFechaN.setForeground(SystemColor.textInactiveText);
 		lblFechaN.setFont(new Font("Roboto Black", Font.PLAIN, 18));
 		contentPane.add(lblFechaN);
@@ -219,18 +248,18 @@ public class RegistroHuesped extends JFrame {
 		txtTelefono = new JTextField();
 		txtTelefono.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyTyped(KeyEvent evt) {
+			public void keyTyped(KeyEvent e) {
 
-				int key = evt.getKeyChar();
+				int key = e.getKeyChar();
 
 				boolean numeros = key >= 48 && key <= 57;
 
 				if (!numeros) {
-					evt.consume();
+					e.consume();
 				}
 
 				if (txtTelefono.getText().trim().length() == 20) {
-					evt.consume();
+					e.consume();
 				}
 			}
 		});
@@ -247,34 +276,28 @@ public class RegistroHuesped extends JFrame {
 		lblTitulo.setFont(new Font("Roboto Black", Font.PLAIN, 23));
 		contentPane.add(lblTitulo);
 
-		JLabel lblNumeroReserva = new JLabel("NÚMERO DE RESERVA");
-		lblNumeroReserva.setBounds(560, 474, 253, 14);
-		lblNumeroReserva.setForeground(SystemColor.textInactiveText);
-		lblNumeroReserva.setFont(new Font("Roboto Black", Font.PLAIN, 18));
-		contentPane.add(lblNumeroReserva);
+		/*
+		 * Borre el campo de id reserva debido a que no veo necesario que este ahi, ya
+		 * que el mismo sistema se encarga de asignar el idreserva al huesped y a la
+		 * misma reserva
+		 */
 
-		txtNreserva = new JTextField();
-		txtNreserva.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent evt) {
-
-				int key = evt.getKeyChar();
-
-				boolean numeros = key >= 48 && key <= 57;
-
-				if (!numeros) {
-					evt.consume();
-				}
-
-			}
-		});
-		txtNreserva.setFont(new Font("Roboto", Font.PLAIN, 16));
-		txtNreserva.setBounds(560, 495, 285, 33);
-		txtNreserva.setColumns(10);
-		txtNreserva.setBackground(Color.WHITE);
-		txtNreserva.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-
-		contentPane.add(txtNreserva);
+//		JLabel lblNumeroReserva = new JLabel("NÚMERO DE RESERVA");
+//		lblNumeroReserva.setBounds(560, 474, 253, 14);
+//		lblNumeroReserva.setForeground(SystemColor.textInactiveText);
+//		lblNumeroReserva.setFont(new Font("Roboto Black", Font.PLAIN, 18));
+//		contentPane.add(lblNumeroReserva);
+//		
+//		txtNreserva = new JTextField();
+//		txtNreserva.setFont(new Font("Roboto", Font.PLAIN, 16));
+//		txtNreserva.setBounds(560, 495, 285, 33);
+//		txtNreserva.setColumns(10);
+//		txtNreserva.setBackground(Color.WHITE);
+//		txtNreserva.setText(String.valueOf(EnviarIdReserva()));
+//		txtNreserva.setEditable(false);
+//		txtNreserva.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+//
+//		contentPane.add(txtNreserva);
 
 		JSeparator separator_1_2 = new JSeparator();
 		separator_1_2.setBounds(560, 170, 289, 2);
@@ -306,11 +329,11 @@ public class RegistroHuesped extends JFrame {
 		separator_1_2_4.setBackground(new Color(12, 138, 199));
 		contentPane.add(separator_1_2_4);
 
-		JSeparator separator_1_2_5 = new JSeparator();
-		separator_1_2_5.setBounds(560, 529, 289, 2);
-		separator_1_2_5.setForeground(new Color(12, 138, 199));
-		separator_1_2_5.setBackground(new Color(12, 138, 199));
-		contentPane.add(separator_1_2_5);
+//		JSeparator separator_1_2_5 = new JSeparator();
+//		separator_1_2_5.setBounds(560, 529, 289, 2);
+//		separator_1_2_5.setForeground(new Color(12, 138, 199));
+//		separator_1_2_5.setBackground(new Color(12, 138, 199));
+//		contentPane.add(separator_1_2_5);
 
 		JPanel btnguardar = new JPanel();
 		btnguardar.setBounds(723, 560, 122, 35);
@@ -319,40 +342,24 @@ public class RegistroHuesped extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 
 				if (txtNombre.getText() != null && txtApellido.getText() != null && txtFechaN.getDate() != null
-						&& txtNacionalidad.getSelectedItem() != null && txtTelefono.getText() != null
-						&& txtNreserva.getText() != null) {
+						&& txtNacionalidad.getSelectedItem() != null && txtTelefono.getText() != null) {
 
 					String nombre = txtNombre.getText();
 					String apellido = txtApellido.getText();
-					java.util.Date fechaDeNacimientoUtil = txtFechaN.getDate();    
+					java.util.Date fechaDeNacimientoUtil = txtFechaN.getDate();
 					java.sql.Date fechaDeNacimientoSQL = new java.sql.Date(fechaDeNacimientoUtil.getTime());
 					String nacionalidad = (String) txtNacionalidad.getSelectedItem();
 					String telefono = txtTelefono.getText();
-					long idReserva = Long.valueOf(txtNreserva.getText());
-					
-					
-//					SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-					
-					java.util.Date fechaEntradaUtil = ReservasView.txtFechaEntrada.getDate();    
-					java.sql.Date fechaEntradaSQL = new java.sql.Date(fechaEntradaUtil.getTime());
-					
-					java.util.Date fechaSalidaUtil = ReservasView.txtFechaSalida.getDate();    
-					java.sql.Date fechaSalidaSQL = new java.sql.Date(fechaSalidaUtil.getTime());
-					
-					
-					double valor = Double.parseDouble(ReservasView.txtValor.getText());
-					String formaPago = (String) ReservasView.txtFormaPago.getSelectedItem();
-					
-					Reserva reserva = new Reserva(idReserva, fechaEntradaSQL, fechaSalidaSQL, valor, formaPago);
+					long idReserva = EnviarIdReserva();
 
+					Huesped huesped = new Huesped(nombre, apellido, fechaDeNacimientoSQL, nacionalidad, telefono,
+							idReserva);
 
-					Huesped huesped = new Huesped(nombre, apellido, fechaDeNacimientoSQL, nacionalidad, telefono, idReserva);
-					
-					reservasDao.Insertar(reserva);
-					huespedDao.Insertar(huesped);
-					
+					huespedController.Insertar(huesped);
+
 //					System.out.println(huesped);
-//					System.out.println(reserva);
+
+					dispose();
 
 					Exito exito = new Exito();
 					exito.setVisible(true);
@@ -362,7 +369,7 @@ public class RegistroHuesped extends JFrame {
 
 			}
 		});
-		
+
 		btnguardar.setLayout(null);
 		btnguardar.setBackground(new Color(12, 138, 199));
 		contentPane.add(btnguardar);
@@ -436,6 +443,25 @@ public class RegistroHuesped extends JFrame {
 		int x = evt.getXOnScreen();
 		int y = evt.getYOnScreen();
 		this.setLocation(x - xMouse, y - yMouse);
+	}
+
+	private long EnviarIdReserva() {
+
+		java.util.Date fechaEntradaUtil = ReservasView.txtFechaEntrada.getDate();
+		java.sql.Date fechaEntradaSQL = new java.sql.Date(fechaEntradaUtil.getTime());
+		java.util.Date fechaSalidaUtil = ReservasView.txtFechaSalida.getDate();
+		java.sql.Date fechaSalidaSQL = new java.sql.Date(fechaSalidaUtil.getTime());
+		double valor = Double.parseDouble(ReservasView.txtValor.getText());
+		String formaPago = (String) ReservasView.txtFormaPago.getSelectedItem();
+
+		Reserva reserva = new Reserva(fechaEntradaSQL, fechaSalidaSQL, valor, formaPago);
+
+		long id = ReservasController.SeleccionarPorId(reserva);
+
+//		System.out.println("id Reserva = " + id);
+
+		return id;
+
 	}
 
 }

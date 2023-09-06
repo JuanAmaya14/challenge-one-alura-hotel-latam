@@ -1,32 +1,33 @@
 package Models;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Reserva {
-	
+
 	private long id;
 	private Date fechaEntrada;
 	private Date fechaSalida;
 	private double valor;
 	private String formaPago;
-	
-	public Reserva() {}
-	
-	public Reserva(long id, Date fechaEntrada, Date fechaSalida, double valor, String formaPago) {
+
+	public Reserva() {
+	}
+
+	public Reserva(long id, Date fechaEntrada2, Date fechaSalida2, double valor, String formaPago) {
 		this.id = id;
-		this.fechaEntrada = fechaEntrada;
-		this.fechaSalida = fechaSalida;
+		this.fechaEntrada = fechaEntrada2;
+		this.fechaSalida = fechaSalida2;
 		this.valor = valor;
 		this.formaPago = formaPago;
 	}
-	
+
 	public Reserva(Date fechaEntrada, Date fechaSalida, double valor, String formaPago) {
 		this.fechaEntrada = fechaEntrada;
 		this.fechaSalida = fechaSalida;
 		this.valor = valor;
 		this.formaPago = formaPago;
 	}
-	
+
 	public Reserva(long id) {
 		this.id = id;
 	}
@@ -76,9 +77,5 @@ public class Reserva {
 		return "Reserva [id=" + id + ", fechaEntrada=" + fechaEntrada + ", fechaSalida=" + fechaSalida + ", valor="
 				+ valor + ", formaPago=" + formaPago + "]";
 	}
-	
-	
-	
-	
 
 }
