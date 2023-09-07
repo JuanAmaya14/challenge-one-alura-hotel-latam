@@ -1,19 +1,17 @@
 package Controller;
 
-import java.util.List;
+import static Conexion.Conexion.close;
+import static Conexion.Conexion.getConnection;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
 import Models.Huesped;
-import Models.Reserva;
-
-import static Conexion.Conexion.getConnection;
-import static Conexion.Conexion.close;
 
 public class HuespedController {
 
@@ -23,6 +21,57 @@ public class HuespedController {
 	private static final String DELETE = "DELETE FROM huespedes WHERE id = ?;";
 	private static final String UPDATE = "UPDATE huespedes SET nombre = ?, apellido = ?, fechaDeNacimiento = ?, nacionalidad = ?, "
 			+ "telefono = ?, idReserva = ?;";
+
+	private static final String SELECT_CON_ID = "SELECT * FROM huespedes where apellido = ?;";
+
+	public List<Huesped> SeleccionarConApellido(String apellido) {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Huesped huesped = null;
+		List<Huesped> huespedLista = new ArrayList<>();
+
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(SELECT_CON_ID);
+
+			pstmt.setString(1, apellido);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				long id = rs.getLong("id");
+				String nombre = rs.getString("nombre");
+				String apellido1 = rs.getString("apellido");
+				Date fechaDeNacimiento = rs.getDate("fechaDeNacimiento");
+				String nacionalidad = rs.getString("nacionalidad");
+				String telefono = rs.getString("telefono");
+				long idReserva = rs.getLong("idReserva");
+
+				huesped = new Huesped(id, nombre, apellido1, fechaDeNacimiento, nacionalidad, telefono, idReserva);
+
+				huespedLista.add(huesped);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			try {
+				close(rs);
+				close(pstmt);
+				close(conn);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+		return huespedLista;
+	}
 
 	public List<Huesped> Seleccionar() {
 
@@ -44,7 +93,6 @@ public class HuespedController {
 				String apellido = rs.getString("apellido");
 				Date fechaDeNacimiento = rs.getDate("fechaDeNacimiento");
 				String nacionalidad = rs.getString("nacionalidad");
-				;
 				String telefono = rs.getString("telefono");
 				long idReserva = rs.getLong("idReserva");
 

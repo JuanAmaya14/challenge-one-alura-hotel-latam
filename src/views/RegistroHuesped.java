@@ -1,41 +1,35 @@
 package views;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
 import java.awt.Color;
-import com.toedter.calendar.JDateChooser;
-
-import Models.Huesped;
-import Models.Reserva;
-
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import java.awt.SystemColor;
-import java.awt.event.ActionListener;
+import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.sql.SQLException;
 import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.awt.event.ActionEvent;
-import java.awt.Toolkit;
-import javax.swing.SwingConstants;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import com.toedter.calendar.JDateChooser;
 
 import Controller.HuespedController;
 import Controller.ReservasController;
+import Models.Huesped;
+import Models.Reserva;
 
 @SuppressWarnings("serial")
 public class RegistroHuesped extends JFrame {
@@ -51,6 +45,8 @@ public class RegistroHuesped extends JFrame {
 	private JLabel labelExit;
 	private JLabel labelAtras;
 	int xMouse, yMouse;
+
+	private final ReservasController reservasController = new ReservasController();
 
 	/**
 	 * Launch the application.
@@ -344,8 +340,8 @@ public class RegistroHuesped extends JFrame {
 				if (txtNombre.getText() != null && txtApellido.getText() != null && txtFechaN.getDate() != null
 						&& txtNacionalidad.getSelectedItem() != null && txtTelefono.getText() != null) {
 
-					String nombre = txtNombre.getText();
-					String apellido = txtApellido.getText();
+					String nombre = txtNombre.getText().trim();
+					String apellido = txtApellido.getText().trim();
 					java.util.Date fechaDeNacimientoUtil = txtFechaN.getDate();
 					java.sql.Date fechaDeNacimientoSQL = new java.sql.Date(fechaDeNacimientoUtil.getTime());
 					String nacionalidad = (String) txtNacionalidad.getSelectedItem();
@@ -456,7 +452,7 @@ public class RegistroHuesped extends JFrame {
 
 		Reserva reserva = new Reserva(fechaEntradaSQL, fechaSalidaSQL, valor, formaPago);
 
-		long id = ReservasController.SeleccionarPorId(reserva);
+		long id = reservasController.SeleccionarId(reserva);
 
 //		System.out.println("id Reserva = " + id);
 
