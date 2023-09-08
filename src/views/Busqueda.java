@@ -4,23 +4,22 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.List;
+import java.util.Optional;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -30,11 +29,6 @@ import Controller.HuespedController;
 import Controller.ReservasController;
 import Models.Huesped;
 import Models.Reserva;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import javax.swing.JList;
-import javax.swing.JRadioButton;
-import javax.swing.JButton;
 
 @SuppressWarnings("serial")
 public class Busqueda extends JFrame {
@@ -277,6 +271,27 @@ public class Busqueda extends JFrame {
 		lblBuscar.setFont(new Font("Roboto", Font.PLAIN, 18));
 
 		JPanel btnEditar = new JPanel();
+		btnEditar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+
+//				if (panel.getSelectedIndex() == 1) {
+//
+//					
+//
+//				} else
+				
+				if (panel.getSelectedIndex() == 1) {
+					
+					modificarHuespedes();
+					limpiarTabla(modeloHuesped);
+					cargarTablaHuespedes();
+
+				} 
+				
+			}
+		});
 		btnEditar.setLayout(null);
 		btnEditar.setBackground(new Color(12, 138, 199));
 		btnEditar.setBounds(635, 508, 122, 35);
@@ -361,17 +376,33 @@ public class Busqueda extends JFrame {
 
 	}
 	
-//    Optional.ofNullable(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), tbHuespedes.getSelectedColumn()))
-//  .ifPresentOrElse(fila -> {
-//      long id = Long.valueOf(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 0).toString());
-//      String nombre = (String) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 1);
-//      String apellido = (String) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 2);
-//      Date fechaDeNacimiento = Date.valueOf(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 3).toString());
-//      String nacionalidad = (String) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 4);
-//      String telefono = (String) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 5);
-//      long idReserva = Long.valueOf(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 6).toString());
-//      
-//
-//      this.huespedController.modificar(nombre, apellido, fechaDeNacimiento, nacionalidad, telefono, idReserva);
-//  }, () -> JOptionPane.showMessageDialog(this, "Por favor, elije un item"));
+    private boolean tieneFilaElegida(JTable tabla) {
+        return tabla.getSelectedRowCount() == 0 || tabla.getSelectedColumnCount() == 0;
+    }
+	
+	private void modificarHuespedes() {
+		
+        if (tieneFilaElegida(tbHuespedes)) {
+            JOptionPane.showMessageDialog(this, "Por favor, elije un item");
+            return;
+        }
+		
+	    Optional.ofNullable(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), tbHuespedes.getSelectedColumn()))
+	  .ifPresentOrElse(fila -> {
+	      long id = Long.valueOf(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 0).toString());
+	      String nombre = (String) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 1);
+	      String apellido = (String) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 2);
+	      java.sql.Date fechaDeNacimiento = java.sql.Date.valueOf(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 3).toString());
+	      String nacionalidad = (String) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 4);
+	      String telefono = (String) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 5);
+	      long idReserva = Long.valueOf(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 6).toString());
+	      
+	      Huesped huesped = new Huesped(id, nombre, apellido, fechaDeNacimiento, nacionalidad, telefono, idReserva);
+	
+	      this.huespedController.modificar(huesped);
+	  }, () -> JOptionPane.showMessageDialog(this, "Por favor, elije un item"));
+		
+	}
+	
+
 }

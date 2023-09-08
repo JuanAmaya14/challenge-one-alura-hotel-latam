@@ -14,22 +14,22 @@ import java.util.List;
 import Models.Huesped;
 
 public class HuespedController {
-
+	
 	private static final String SELECT = "SELECT * FROM huespedes;";
 	private static final String INSERT = "INSERT INTO huespedes(nombre, apellido, fechaDeNacimiento, nacionalidad, telefono, idReserva) "
 			+ "VALUE(?, ?, ?, ?, ?, ?);";
 	private static final String DELETE = "DELETE FROM huespedes WHERE id = ?;";
 	private static final String UPDATE = "UPDATE huespedes SET nombre = ?, apellido = ?, fechaDeNacimiento = ?, nacionalidad = ?, "
-			+ "telefono = ?, idReserva = ?;";
+			+ "telefono = ?, idReserva = ? WHERE id = ?;";
 
 	private static final String SELECT_CON_ID = "SELECT * FROM huespedes where apellido = ?;";
 
 	public List<Huesped> SeleccionarConApellido(String apellido) {
 
-		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Huesped huesped = null;
+		Connection conn = null;
 		List<Huesped> huespedLista = new ArrayList<>();
 
 		try {
@@ -100,8 +100,6 @@ public class HuespedController {
 
 				huespedLista.add(huesped);
 
-//	                System.out.println(huesped);
-
 			}
 
 		} catch (SQLException e) {
@@ -152,6 +150,43 @@ public class HuespedController {
 		}
 
 		return insertado;
+	}
+
+	public int modificar(Huesped huesped) {
+		
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        int actualizado = 0;
+
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(UPDATE);
+            
+            pstmt.setString(1, huesped.getNombre());
+            pstmt.setString(2, huesped.getApellido());
+            pstmt.setDate(3, (java.sql.Date) huesped.getFechaDeNacimiento());
+            pstmt.setString(4, huesped.getNacionalidad());
+            pstmt.setString(5, huesped.getTelefono());
+            pstmt.setLong(6, huesped.getIdReserva());
+            pstmt.setLong(7, huesped.getId());
+
+            actualizado = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }finally {
+
+            try {
+                close(conn);
+                close(pstmt);
+            } catch (SQLException e) {
+                e.printStackTrace(System.out);
+            }
+
+        }
+
+        return actualizado;
+		
 	}
 
 }

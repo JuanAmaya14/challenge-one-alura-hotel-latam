@@ -18,7 +18,7 @@ public class ReservasController {
 	private static final String SELECT = "SELECT * FROM reservas;";
 	private static final String INSERT = "INSERT INTO reservas(fechaEntrada, fechaSalida, valor, formaPago) VALUE(?, ?, ?, ?);";
 	private static final String DELETE = "DELETE FROM reservas WHERE id = ?;";
-	private static final String UPDATE = "UPDATE reservas SET fechaEntrada = ?, fechaSalida = ?, valor = ?, formaPago = ?;";
+	private static final String UPDATE = "UPDATE reservas SET fechaEntrada = ?, fechaSalida = ?, valor = ?, formaPago = ? WHERE id = ?;";
 
 	private static final String SELECT_MANDAR_ID = "SELECT id FROM reservas where fechaEntrada = ? and fechaSalida = ? and valor = ? and formaPago = ?";
 
