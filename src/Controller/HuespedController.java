@@ -13,6 +13,7 @@ import java.util.List;
 
 import Models.Huesped;
 
+// HUESPED CONTROLLER
 public class HuespedController {
 	
 	private static final String SELECT = "SELECT * FROM huespedes;";
@@ -21,9 +22,10 @@ public class HuespedController {
 	private static final String DELETE = "DELETE FROM huespedes WHERE id = ?;";
 	private static final String UPDATE = "UPDATE huespedes SET nombre = ?, apellido = ?, fechaDeNacimiento = ?, nacionalidad = ?, "
 			+ "telefono = ?, idReserva = ? WHERE id = ?;";
-
 	private static final String SELECT_CON_ID = "SELECT * FROM huespedes where apellido = ?;";
 
+	
+	// GET MANDANDO APELLIDO
 	public List<Huesped> SeleccionarConApellido(String apellido) {
 
 		PreparedStatement pstmt = null;
@@ -72,7 +74,8 @@ public class HuespedController {
 
 		return huespedLista;
 	}
-
+	
+	// GET
 	public List<Huesped> Seleccionar() {
 
 		Connection conn = null;
@@ -119,6 +122,7 @@ public class HuespedController {
 		return huespedLista;
 	}
 
+	// POST
 	public int Insertar(Huesped huesped) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -152,6 +156,7 @@ public class HuespedController {
 		return insertado;
 	}
 
+	// PUT
 	public int modificar(Huesped huesped) {
 		
         Connection conn = null;
@@ -187,6 +192,35 @@ public class HuespedController {
 
         return actualizado;
 		
+	}
+	
+	// DELETE
+	public int Eliminar(Huesped huesped) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int eliminado = 0;
+
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(DELETE);
+
+			pstmt.setLong(1, huesped.getId());
+
+			eliminado = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			try {
+				close(conn);
+				close(pstmt);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return eliminado;
 	}
 
 }

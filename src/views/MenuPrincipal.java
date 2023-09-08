@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+// MENU PRINICPAL
 @SuppressWarnings("serial")
 public class MenuPrincipal extends JFrame {
 

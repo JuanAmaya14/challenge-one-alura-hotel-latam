@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+// ESTABLECE CONEXION CON LA BASE DE DATOS
 public class Conexion {
 
 	private final static String URL = "jdbc:mysql://127.0.0.1:3306/hotel_alura";

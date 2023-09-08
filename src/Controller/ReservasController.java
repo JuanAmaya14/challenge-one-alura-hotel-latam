@@ -13,6 +13,7 @@ import java.util.List;
 
 import Models.Reserva;
 
+// RESERVAS CONTROLLER
 public class ReservasController {
 
 	private static final String SELECT = "SELECT * FROM reservas;";
@@ -24,6 +25,7 @@ public class ReservasController {
 
 	private static final String SELECT_CON_ID = "SELECT * FROM reservas where id = ?;";
 
+	// GET
 	public List<Reserva> Seleccionar() {
 
 		Connection conn = null;
@@ -67,6 +69,7 @@ public class ReservasController {
 		return reservaLista;
 	}
 
+	// GET MANDANDO ID
 	public List<Reserva> SeleccionarConId(long id) {
 
 		Connection conn = null;
@@ -114,6 +117,7 @@ public class ReservasController {
 		return reservaLista;
 	}
 
+	// GET RETORNANDO ID
 	public long SeleccionarId(Reserva reserva) {
 
 		Connection conn = null;
@@ -155,6 +159,7 @@ public class ReservasController {
 		return id;
 	}
 
+	// POST
 	public int Insertar(Reserva reserva) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -184,6 +189,71 @@ public class ReservasController {
 		}
 
 		return insertado;
+	}
+
+	// PUT
+	public int modificar(Reserva reserva) {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int actualizado = 0;
+
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(UPDATE);
+
+			pstmt.setDate(1, (java.sql.Date) reserva.getFechaEntrada());
+			pstmt.setDate(2, (java.sql.Date) reserva.getFechaSalida());
+			pstmt.setDouble(3, reserva.getValor());
+			pstmt.setString(4, reserva.getFormaPago());
+			pstmt.setLong(5, reserva.getId());
+
+			actualizado = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace(System.out);
+		} finally {
+
+			try {
+				close(conn);
+				close(pstmt);
+			} catch (SQLException e) {
+				e.printStackTrace(System.out);
+			}
+
+		}
+
+		return actualizado;
+
+	}
+
+	// DELETE
+	public int Eliminar(Reserva reserva) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int eliminado = 0;
+
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(DELETE);
+
+			pstmt.setLong(1, reserva.getId());
+
+			eliminado = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			try {
+				close(conn);
+				close(pstmt);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return eliminado;
 	}
 
 }

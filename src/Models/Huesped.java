@@ -2,6 +2,7 @@ package Models;
 
 import java.util.Date;
 
+// MODELO HUESPED
 public class Huesped {
 
 	private long id;
@@ -11,9 +12,6 @@ public class Huesped {
 	private String nacionalidad;
 	private String telefono;
 	private long idReserva;
-
-	public Huesped() {
-	}
 
 	public Huesped(long id, String nombre, String apellido, Date fechaDeNacimiento2, String nacionalidad,
 			String telefono, long idReserva) {
@@ -94,13 +92,6 @@ public class Huesped {
 
 	public void setIdReserva(long idReserva) {
 		this.idReserva = idReserva;
-	}
-
-	@Override
-	public String toString() {
-		return "Huesped [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", fechaDeNacimiento="
-				+ fechaDeNacimiento + ", nacionalidad=" + nacionalidad + ", telefono=" + telefono + ", idReserva="
-				+ idReserva + "]";
 	}
 
 }

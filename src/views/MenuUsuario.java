@@ -19,6 +19,7 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+// MENU USUARIO
 @SuppressWarnings("serial")
 public class MenuUsuario extends JFrame {
 

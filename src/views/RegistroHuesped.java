@@ -31,6 +31,7 @@ import Controller.ReservasController;
 import Models.Huesped;
 import Models.Reserva;
 
+//PANTALLA PARA REGISTRAR HUESPED
 @SuppressWarnings("serial")
 public class RegistroHuesped extends JFrame {
 
@@ -140,6 +141,8 @@ public class RegistroHuesped extends JFrame {
 			@Override
 			public void keyTyped(KeyEvent e) {
 
+				// Solo se permiten letras y espacios
+
 				if (!Character.isLetter(e.getKeyChar()) && !(e.getKeyChar() == KeyEvent.VK_SPACE)
 						&& !(e.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
 					e.consume();
@@ -162,6 +165,8 @@ public class RegistroHuesped extends JFrame {
 		txtApellido.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
+
+				// Solo se permiten letras y espacios
 
 				if (!Character.isLetter(e.getKeyChar()) && !(e.getKeyChar() == KeyEvent.VK_SPACE)
 						&& !(e.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
@@ -245,6 +250,8 @@ public class RegistroHuesped extends JFrame {
 		txtTelefono.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
+
+				// Solo se permiten numeros
 
 				int key = e.getKeyChar();
 
@@ -337,6 +344,8 @@ public class RegistroHuesped extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
+				// Guardar huesped
+
 				if (txtNombre.getText() != null && txtApellido.getText() != null && txtFechaN.getDate() != null
 						&& txtNacionalidad.getSelectedItem() != null && txtTelefono.getText() != null) {
 
@@ -352,8 +361,6 @@ public class RegistroHuesped extends JFrame {
 							idReserva);
 
 					huespedController.Insertar(huesped);
-
-//					System.out.println(huesped);
 
 					dispose();
 
@@ -441,6 +448,7 @@ public class RegistroHuesped extends JFrame {
 		this.setLocation(x - xMouse, y - yMouse);
 	}
 
+	// Recoge el id de la reserva agregada y lo retorna para guardarlo
 	private long EnviarIdReserva() {
 
 		java.util.Date fechaEntradaUtil = ReservasView.txtFechaEntrada.getDate();
@@ -453,8 +461,6 @@ public class RegistroHuesped extends JFrame {
 		Reserva reserva = new Reserva(fechaEntradaSQL, fechaSalidaSQL, valor, formaPago);
 
 		long id = reservasController.SeleccionarId(reserva);
-
-//		System.out.println("id Reserva = " + id);
 
 		return id;
 

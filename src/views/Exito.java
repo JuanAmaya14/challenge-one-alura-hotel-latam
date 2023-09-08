@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+// PANTALLA DE ENTIDAD GUARDADA CON EXITO
 @SuppressWarnings("serial")
 public class Exito extends JDialog {
 

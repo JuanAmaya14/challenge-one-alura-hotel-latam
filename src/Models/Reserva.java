@@ -2,6 +2,7 @@ package Models;
 
 import java.util.Date;
 
+// MODELO RESERVA
 public class Reserva {
 
 	private long id;
@@ -10,13 +11,10 @@ public class Reserva {
 	private double valor;
 	private String formaPago;
 
-	public Reserva() {
-	}
-
-	public Reserva(long id, Date fechaEntrada2, Date fechaSalida2, double valor, String formaPago) {
+	public Reserva(long id, Date fechaEntrada, Date fechaSalida, double valor, String formaPago) {
 		this.id = id;
-		this.fechaEntrada = fechaEntrada2;
-		this.fechaSalida = fechaSalida2;
+		this.fechaEntrada = fechaEntrada;
+		this.fechaSalida = fechaSalida;
 		this.valor = valor;
 		this.formaPago = formaPago;
 	}
@@ -34,10 +32,6 @@ public class Reserva {
 
 	public long getId() {
 		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public Date getFechaEntrada() {
@@ -70,12 +64,6 @@ public class Reserva {
 
 	public void setFormaPago(String formaPago) {
 		this.formaPago = formaPago;
-	}
-
-	@Override
-	public String toString() {
-		return "Reserva [id=" + id + ", fechaEntrada=" + fechaEntrada + ", fechaSalida=" + fechaSalida + ", valor="
-				+ valor + ", formaPago=" + formaPago + "]";
 	}
 
 }

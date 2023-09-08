@@ -31,6 +31,7 @@ import com.toedter.calendar.JDateChooser;
 import Controller.ReservasController;
 import Models.Reserva;
 
+//PANTALLA DE AGREGAR RESERVA
 @SuppressWarnings("serial")
 public class ReservasView extends JFrame {
 
@@ -321,6 +322,9 @@ public class ReservasView extends JFrame {
 		btnsiguiente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+
+				// Se guarda la reserva
+
 				if (txtFechaEntrada.getDate() != null && txtFechaSalida.getDate() != null) {
 
 					RegistroHuesped registroHuesped = new RegistroHuesped();
@@ -338,8 +342,6 @@ public class ReservasView extends JFrame {
 					Reserva reserva = new Reserva(fechaEntradaSQL, fechaSalidaSQL, valor, formaPago);
 
 					reservasController.Insertar(reserva);
-
-//					System.out.println(reserva);
 
 					dispose();
 
