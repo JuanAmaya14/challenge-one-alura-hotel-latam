@@ -18,6 +18,7 @@
 - Plugin WindowBuilder </br>
 
 ---
+
 ## ⚠️ Importante! ⚠️
 
 ☕ Use Java versión 8 o superior para compatibilidad. </br></br>
@@ -28,13 +29,6 @@
 
 #### Para este desafío, concéntrate en la parte lógica y la conexión con la base de datos, después de completar el desafío, siéntete libre de agregar nuevas funciones y modificar la interfaz gráfica.
 ---
-
-## 🔍 ¡Analizando nuestro repositorio!
-
-### Este es el repositorio base de nuestro proyecto, en el encontrarás:
-#### 🔹 src/views: carpeta con toda la interfaz gráfica de las pantallas necesarias para desarrollar el programa;
-#### 🔹 src/imagenes: carpeta con imágenes que puedes usar en tu proyecto. Siéntete libre de usar otros, si lo deseas;
-</br>
 
 ## 📝 Eclipse
 
@@ -73,6 +67,8 @@ Luego haz clic en el botón <em>Browse</em> y busca el proyecto en el directorio
 <p align="center" >
      <img width="600" heigth="600" src="https://user-images.githubusercontent.com/101413385/169432246-a769555c-daf9-490e-a0c7-908f7e5de967.png">
 </p>
+
+# Recursos
 
 ## 📅 JCalendar
 
@@ -177,6 +173,16 @@ Es la misma ruta descrita para importar el <strong>JCalendar</strong>, haga clic
      <img width="500" heigth="500" src="https://user-images.githubusercontent.com/101413385/173169737-5f93868e-df8f-4177-90ba-faf9570758ac.png">
 </p>
 
+En caso de que este archivo no este puedes dercargarlo por: 🔹 [MySQL Community Downloads](https://dev.mysql.com/downloads/connector/j/?os=26)
+
+### Archivo .sql
+
+En la carpeta "Base de datos" esta un archivo <strong>.SQL</strong> que es la estructura de la base de datos del reto, el cual lo puedes importar.
+
+<p align="center" >
+     <img src="https://github.com/JuanAmaya14/challenge-one-alura-hotel-latam/assets/66374583/e07bed25-530d-49b1-b95f-b57f7a1d7773" />
+</p>
+
 ### Modelado de tablas:
 
 Para este reto te proponemos dos tablas: <strong>Reservas</strong> y <strong>Huéspedes</strong>. La tabla de huéspedes debe contener la clave externa <em>(foreign key)</em> <strong>idReserva</strong>.
@@ -228,31 +234,4 @@ La pestaña de <em>Design</em> se abrirá por encima de la zona del <em>Console<
      <img width="500" heigth="500" src="https://user-images.githubusercontent.com/101413385/173682648-4c371224-fe4b-4e57-a3ee-9298a4d44554.png">
 </p>
 
-## 📬 Entrega
-
-### ¿Cómo incluir mi proyecto con el "#" del desafío?
-
-1) Ten el <strong>Fork</strong> del proyecto en tu repositorio en Github.
-2) Utiliza el topico **challengeonehotelaluralatam4** </br>
-3) Ve a la pestaña derecha de tu proyecto y haz clic en el engranaje de configuración en la sección <em>About</em>, selecciona el campo **topics** e inserae la etiqueta **challengeonehotelaluralatam4**
-
-
-### ¿Cómo hago la entrega final de mi Proyecto?
-
-4) Rellena el siguiente formulario con tus datos personales, junto con el enlace de tu repositorio. 🔹 [Link para o formulário](https://lp.alura.com.br/alura-latam-entrega-challenge-one-esp-back-end)
-
-<p align="center" >
-     <img width="700" heigth="700" src="https://user-images.githubusercontent.com/91544872/218745016-7d4582b1-0a7a-4501-a2a5-2b57da523635.png">
-</p>
-
-5) Ve a tu correo electrónico y canjea tu insignia obtenida al completar otro desafío del Proyecto ONE! 🏆
-
-6) ¡No olvides poner un enlace o video de tu proyecto en Linkedin! Etiqueta a #Oracle y #AluraLatam 🏁
-
-🧡 <strong>Oracle</strong></br>
-<a href="https://www.linkedin.com/company/oracle/" target="_blank">
-<img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
-
-💙 <strong>Alura Latam</strong></br>
-<a href="https://www.linkedin.com/company/alura-latam/mycompany/" target="_blank">
-<img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
+## 📺 Repositorio de la interfaz: 🔹 [challenge-one-alura-hotel-latam](https://github.com/alura-challenges/challenge-one-alura-hotel-latam)
